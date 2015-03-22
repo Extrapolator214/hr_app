@@ -13,7 +13,7 @@
 
 class Applicant < ActiveRecord::Base
   has_many :applicant_skills
-  has_many :skills, through: :user_skills
+  has_many :skills, through: :applicant_skills
 
   enum status: [:active, :idle]
 

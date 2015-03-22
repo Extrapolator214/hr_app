@@ -1,0 +1,19 @@
+h1 Listing applicants
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @applicants.each do |applicant|
+      tr
+        td = link_to 'Show', applicant
+        td = link_to 'Edit', edit_applicant_path(applicant)
+        td = link_to 'Destroy', applicant, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Applicant', new_applicant_path
