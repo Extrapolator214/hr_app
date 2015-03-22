@@ -1,9 +1,24 @@
-= form_for @vacancy do |f|
-  - if @vacancy.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@vacancy.errors.count, "error")} prohibited this vacancy from being saved:"
-      ul
-        - @vacancy.errors.full_messages.each do |message|
-          li = message
-
-  .actions = f.submit
+= form_for @vacancy, html: { class: "form form-horizontal vacancy" } do |f|
+  .form-group
+    = f.label :title, :class => 'control-label'
+    .controls
+      = f.text_field :title, :class => 'form-control'
+    = error_span(@vacancy[:title])
+  .form-group
+    = f.label :valid_to, :class => 'control-label'
+    .controls
+      = f.text_field :valid_to, :class => 'form-control'
+    = error_span(@vacancy[:valid_to])
+  .form-group
+    = f.label :salary, :class => 'control-label'
+    .controls
+      = f.text_field :salary, :class => 'form-control'
+    = error_span(@vacancy[:salary])
+  .form-group
+    = f.label :contact_info, :class => 'control-label'
+    .controls
+      = f.text_field :contact_info, :class => 'form-control'
+    = error_span(@vacancy[:contact_info])
+  = f.submit nil, :class => 'btn btn-primary'
+  '
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), vacancies_path, :class => 'btn'
