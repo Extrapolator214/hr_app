@@ -2,23 +2,24 @@
   .form-group
     = f.label :full_name, :class => 'control-label'
     .controls
-      = f.text_field :full_name, :class => 'form-control'
+      = f.text_field :full_name, :class => 'form-control', placeholder: "Иванов Иван Иванович (3 слова, только кириллические буквы)"
     = error_span(@applicant[:full_name])
   .form-group
     = f.label :contact_info, :class => 'control-label'
     .controls
-      = f.text_field :contact_info, :class => 'form-control'
+      = f.text_field :contact_info, :class => 'form-control', placeholder: "адрес эл-почты или номер телефона в формате +71234567890"
     = error_span(@applicant[:contact_info])
   .form-group
     = f.label :status, :class => 'control-label'
     .controls
-      = f.text_field :status, :class => 'form-control'
+      = f.select :status, options_for_select([['Активен', :active], ['Не ищет', :idle]]), {}, {class: 'form-control'}
     = error_span(@applicant[:status])
   .form-group
     = f.label :expected_salary, :class => 'control-label'
     .controls
-      = f.text_field :expected_salary, :class => 'form-control'
+      = f.number_field :expected_salary, :class => 'form-control'
     = error_span(@applicant[:expected_salary])
-  = f.submit nil, :class => 'btn btn-primary'
+
+  = f.submit 'Создать', :class => 'btn btn-primary'
   '
   = link_to t('.cancel', :default => t("helpers.links.cancel")), applicants_path, :class => 'btn'

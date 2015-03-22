@@ -1,10 +1,9 @@
 - model_class = Applicant
 div class="page-header"
-  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  h1 Работники
 table class="table table-striped"
   thead
     tr
-      th= model_class.human_attribute_name(:id)
       th= model_class.human_attribute_name(:full_name)
       th= model_class.human_attribute_name(:contact_info)
       th= model_class.human_attribute_name(:status)
@@ -14,12 +13,11 @@ table class="table table-striped"
   tbody
     - @applicants.each do |applicant|
       tr
-        td= link_to applicant.id, applicant_path(applicant)
-        td= applicant.full_name
+        td= link_to applicant.full_name, applicant_path(applicant)
         td= applicant.contact_info
         td= applicant.status
         td= applicant.expected_salary
-        td=l applicant.created_at
+        td= applicant.created_at
         td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_applicant_path(applicant), :class => 'btn btn-default btn-xs'
           '

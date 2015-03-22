@@ -1,0 +1,34 @@
+ru:
+
+  # bootstrap block
+  breadcrumbs:
+    application:
+      root: "Главная"
+    pages:
+      pages: "Страницы"
+  helpers:
+    actions: "Действия"
+    links:
+      back: "Назад"
+      cancel: "Отмена"
+      confirm: "Вы уверены?"
+      destroy: "Удалить"
+      new: "Создать"
+      edit: "Изменить"
+    titles:
+      edit: "Изменить %{model}"
+      save: "Сохранить %{model}"
+      new: "Создать %{model}"
+      delete: "Удалить %{model}"
+  # --end of bootstrap block--
+
+  attributes:
+    created_at: "Дата создания"
+    updated_at: "Обновлено"
+  activerecord:
+    attributes:
+      applicant:
+        full_name: "ФИО"
+        contact_info: "Контактная информация"
+        status: "Статус поиска работы"
+        expected_salary: "Желаемая зарплата (руб.)"
