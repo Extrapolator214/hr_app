@@ -12,7 +12,7 @@
 #
 
 class Applicant < ActiveRecord::Base
-  has_many :applicant_skills
+  has_many :applicant_skills, dependent: :delete_all
   has_many :skills, through: :applicant_skills
 
   enum status: [:active, :idle]
@@ -37,11 +37,14 @@ class Applicant < ActiveRecord::Base
   end
 
   def skill_list
-    self.skills.map{|s| s.name}.join(',')
+    self.skills.map(&:name).join(',')
   end
 
   def skill_list=(string)
-    self.skills.new(string.split(',').map{|s| {name: s}})
+    string.split(',').each do |s|
+      skill = Skill.find_or_create_by(name: s)
+      self.applicant_skills.find_or_initialize_by(skill_id: skill.id)
+    end
   end
 
 end

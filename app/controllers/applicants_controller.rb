@@ -1,5 +1,5 @@
 class ApplicantsController < ApplicationController
-  before_action :set_applicant, only: [:show, :edit, :update, :destroy]
+  before_action :set_applicant, only: [:show, :edit, :update, :destroy, :suitable_vacancies]
 
   # GET /applicants
   # GET /applicants.json
@@ -59,6 +59,13 @@ class ApplicantsController < ApplicationController
       format.html { redirect_to applicants_url, notice: 'Applicant was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def suitable_vacancies
+    skills = @applicant.skills.map(&:name)
+    vacancies = Vacancy.includes(:skills).not_expired.with_skills(skills)
+    @full_match = vacancies.select{|v| skills.included_in? v.skills.map(&:name) }
+    @partial_match = vacancies.reject{|v| skills.included_in? v.skills.map(&:name) }
   end
 
   private

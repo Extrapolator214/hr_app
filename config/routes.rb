@@ -8,9 +8,17 @@ Rails.application.routes.draw do
   get 'skills/search' => 'skills#search'
 
 
-  resources :applicants
+  resources :applicants do
+    member do
+      get 'suitable_vacancies'
+    end
+  end
 
-  resources :vacancies
+  resources :vacancies do
+    member do
+      get 'suitable_applicants'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -18,6 +18,10 @@ p
   strong= model_class.human_attribute_name(:contact_info) + ':'
   br
   = @vacancy.contact_info
+p
+  strong Навыки:
+  br
+  =text_field_tag :skill_list, @vacancy.skills.map(&:name).join(','), class: 'skills skills-disabled'
 
 = link_to t('.back', :default => t("helpers.links.back")), vacancies_path, :class => 'btn btn-default'
 '

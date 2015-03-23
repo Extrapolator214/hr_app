@@ -21,7 +21,7 @@ p
 p
   strong Навыки:
   br
-  =text_field_tag :skill_list, @applicant.skills.map{|s| s.name}.join(','), class: 'skills skills-disabled'
+  =text_field_tag :skill_list, @applicant.skills.map(&:name).join(','), class: 'skills skills-disabled'
 
 = link_to t('.back', :default => t("helpers.links.back")), applicants_path, :class => 'btn btn-default'
 '

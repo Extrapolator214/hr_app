@@ -1,0 +1,16 @@
+div class="page-header"
+  h1=@applicant.full_name
+  h2 Подходящие вакансии
+
+table class="table table-striped"
+  thead
+    tr
+      th Полностью подходят
+      th Частично подходят
+  tbody
+
+    tr
+    - @full_match.each do |v|
+      td= link_to v.title, vacancy_path(v)
+    - @partial_match.each do |v|
+      td= link_to v.title, vacancy_path(v)

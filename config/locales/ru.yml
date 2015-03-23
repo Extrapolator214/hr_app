@@ -29,12 +29,19 @@ ru:
   activerecord:
     models:
       applicant: "Работник"
+      vacancy: "Вакансия"
     attributes:
       applicant:
         full_name: "ФИО"
         contact_info: "Контактная информация"
         status: "Статус поиска работы"
         expected_salary: "Желаемая зарплата (руб.)"
+      vacancy:
+        title: "Название"
+        valid_to: "Срок действия"
+        salary: "Зарплата"
+        contact_info: "Контактная информация"
+
 
   applicant_status:
     active:   "Активен"
