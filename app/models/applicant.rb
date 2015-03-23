@@ -25,6 +25,16 @@ class Applicant < ActiveRecord::Base
 
   validate :contact_info_email_or_phone
 
+  scope :with_skills, ->(skill_names = nil) do
+    if skill_names.blank? || !skill_names.kind_of?(Array)
+      all
+    else
+      joins(:skills).where(skills: {name: skill_names}).uniq
+    end
+  end
+
+  scope :active, -> {where(status: Applicant.statuses[:active])}
+
   def strip_spaces_from_name
     self.full_name = full_name.gsub(/\s{2,}/, ' ').strip if attribute_present?(:full_name)
   end

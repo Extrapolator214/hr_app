@@ -19,7 +19,7 @@ class Vacancy < ActiveRecord::Base
     if skill_names.blank? || !skill_names.kind_of?(Array)
       all
     else
-      joins(:skills).where(skills: {name: skill_names})
+      joins(:skills).where(skills: {name: skill_names}).uniq
     end
   end
 

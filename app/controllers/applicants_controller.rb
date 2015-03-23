@@ -63,9 +63,14 @@ class ApplicantsController < ApplicationController
 
   def suitable_vacancies
     skills = @applicant.skills.map(&:name)
-    vacancies = Vacancy.includes(:skills).not_expired.with_skills(skills)
-    @full_match = vacancies.select{|v| skills.included_in? v.skills.map(&:name) }
-    @partial_match = vacancies.reject{|v| skills.included_in? v.skills.map(&:name) }
+    vacancies = Vacancy.not_expired.with_skills(skills).order('salary DESC')
+    full_match = vacancies.select{|v| (v.skills.map(&:name) - skills).empty? }
+    partial_match = vacancies.reject{|v| (v.skills.map(&:name) - skills).empty? }
+    @vacancies = if full_match.size > partial_match.size
+                   full_match.zip(partial_match).flatten
+                 else
+                   partial_match.zip(full_match).map(&:reverse).flatten
+                 end
   end
 
   private

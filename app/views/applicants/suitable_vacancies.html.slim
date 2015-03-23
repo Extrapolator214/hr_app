@@ -8,9 +8,9 @@ table class="table table-striped"
       th Полностью подходят
       th Частично подходят
   tbody
-
-    tr
-    - @full_match.each do |v|
-      td= link_to v.title, vacancy_path(v)
-    - @partial_match.each do |v|
-      td= link_to v.title, vacancy_path(v)
+    - @vacancies.each_slice(2) do |v|
+      tr
+        / full match
+        td= link_to "#{v[0].title} (#{v[0].salary})", vacancy_path(v[0]) if v[0]
+        /partial match
+        td= link_to "#{v[1].title} (#{v[1].salary})", vacancy_path(v[1]) if v[1]

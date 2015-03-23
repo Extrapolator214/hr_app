@@ -26,3 +26,5 @@
   = f.submit 'Сохранить', :class => 'btn btn-primary'
   '
   = link_to t('.cancel', :default => t("helpers.links.cancel")), vacancies_path, :class => 'btn'
+  '
+  = link_to 'Найти вакансии', suitable_applicants_vacancy_path(@vacancy), :class => 'btn'

@@ -1,5 +1,5 @@
 class VacanciesController < ApplicationController
-  before_action :set_vacancy, only: [:show, :edit, :update, :destroy]
+  before_action :set_vacancy, only: [:show, :edit, :update, :destroy, :suitable_applicants]
 
   # GET /vacancies
   # GET /vacancies.json
@@ -59,6 +59,20 @@ class VacanciesController < ApplicationController
       format.html { redirect_to vacancies_url, notice: 'Vacancy was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def suitable_applicants
+    skills = @vacancy.skills.map(&:name)
+    p skills
+    applicants = Applicant.active.with_skills(skills).order('expected_salary ASC')
+    p applicants
+    full_match = applicants.select{|v| (v.skills.map(&:name) - skills).empty? }
+    partial_match = applicants.reject{|v| (v.skills.map(&:name) - skills).empty? }
+    @applicants = if full_match.size > partial_match.size
+                   full_match.zip(partial_match).flatten
+                 else
+                   partial_match.zip(full_match).map(&:reverse).flatten
+                 end
   end
 
   private

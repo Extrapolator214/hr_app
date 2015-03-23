@@ -1,0 +1,16 @@
+div class="page-header"
+  h1=@vacancy.title
+  h2 Подходящие работники
+
+table class="table table-striped"
+  thead
+    tr
+      th Полностью подходят
+      th Частично подходят
+  tbody
+    - @applicants.each_slice(2) do |v|
+      tr
+        / full match
+        td= link_to "#{v[0].full_name} (#{v[0].expected_salary})", applicant_path(v[0]) if v[0]
+        /partial match
+        td= link_to "#{v[1].full_name} (#{v[1].expected_salary})", applicant_path(v[1]) if v[1]
