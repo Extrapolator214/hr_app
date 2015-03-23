@@ -25,10 +25,17 @@ ru:
   attributes:
     created_at: "Дата создания"
     updated_at: "Обновлено"
+    skills: "Навыки"
   activerecord:
+    models:
+      applicant: "Работник"
     attributes:
       applicant:
         full_name: "ФИО"
         contact_info: "Контактная информация"
         status: "Статус поиска работы"
         expected_salary: "Желаемая зарплата (руб.)"
+
+  applicant_status:
+    active:   "Активен"
+    idle:  "Не ищет"

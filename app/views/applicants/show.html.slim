@@ -13,11 +13,15 @@ p
 p
   strong= model_class.human_attribute_name(:status) + ':'
   br
-  = @applicant.status
+  = t "applicant_status.#{@applicant.status}"
 p
   strong= model_class.human_attribute_name(:expected_salary) + ':'
   br
   = @applicant.expected_salary
+p
+  strong Навыки:
+  br
+  =text_field_tag :skill_list, @applicant.skills.map{|s| s.name}.join(','), class: 'skills skills-disabled'
 
 = link_to t('.back', :default => t("helpers.links.back")), applicants_path, :class => 'btn btn-default'
 '

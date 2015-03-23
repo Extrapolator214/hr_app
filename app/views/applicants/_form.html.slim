@@ -19,7 +19,11 @@
     .controls
       = f.number_field :expected_salary, :class => 'form-control'
     = error_span(@applicant[:expected_salary])
+  .form-group
+    = f.label :skills, :class => 'control-label'
+    .controls
+      = f.text_field :skill_list, class: 'form-control skills'
 
-  = f.submit 'Создать', :class => 'btn btn-primary'
+  = f.submit 'Сохранить', :class => 'btn btn-primary'
   '
   = link_to t('.cancel', :default => t("helpers.links.cancel")), applicants_path, :class => 'btn'

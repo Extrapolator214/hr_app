@@ -15,7 +15,7 @@ table class="table table-striped"
       tr
         td= link_to applicant.full_name, applicant_path(applicant)
         td= applicant.contact_info
-        td= applicant.status
+        td= t "applicant_status.#{applicant.status}"
         td= applicant.expected_salary
         td= applicant.created_at
         td

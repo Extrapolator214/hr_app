@@ -36,4 +36,12 @@ class Applicant < ActiveRecord::Base
     end
   end
 
+  def skill_list
+    self.skills.map{|s| s.name}.join(',')
+  end
+
+  def skill_list=(string)
+    self.skills.new(string.split(',').map{|s| {name: s}})
+  end
+
 end
